@@ -1,0 +1,15 @@
+version: "1.0"
+services:
+  hackem_yandex_dialogs:
+    build: .
+    container_name: hackem_yandex_dialogs
+    image: hackem_yandex_dialogs
+    restart: always
+    ports:
+      - "20230:20230"
+    volumes:
+      - type: bind
+        source: $PWD/static
+        target: /app/static
+    environment:
+      - ENV=production

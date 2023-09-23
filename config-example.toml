@@ -1,0 +1,21 @@
+# rename this file to config.toml
+
+[app]
+prod = false
+addr = "0.0.0.0"
+port = 20230
+webhook_url = "/"
+api_token = ""
+username = ""
+
+[core]
+supported_modules = ["modules"]
+
+# some integrations
+[features]
+use_file_logs = true
+use_apscheduler = true
+
+# apscheduler configuration (works only if use_apscheduler feature enabled)
+[features.apscheduler]
+timezone = "Asia/Yerevan"

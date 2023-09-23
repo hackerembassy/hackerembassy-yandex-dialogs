@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "hackem_yandex_dialogs"
+version = "1.0.0"
+description = "Навык для платформы Яндекс Диалоги, позволяющий общаться со спейсом с Яндекс Станции и других умных устройств Яндекса"
+authors = ["rf0x3d <yarekfrolov@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiohttp = { extras = ["speedups"], version = "^3.8.3" }
+charset-normalizer = ">=2.0,<3.0"
+loguru = "^0.6.0"
+cachetools = "^4.2.4"
+uvloop = "^0.16.0"
+aiodns = "^3.0.0"
+toml = "^0.10.2"
+apscheduler = "^3.9.1.post1"
+orjson = "^3.8.6"
+aioalice = { git = "https://github.com/rfoxxxy/aioalice" }
+pydantic = "^2.3.0"
+sqlalchemy = "^2.0.21"
+
+[tool.poetry.group.dev.dependencies]
+pycodestyle = "^2.8.0"
+isort = "^5.10.1"
+pytest = "^7.2.0"
+pytest-mock = "^3.10.0"
+autoflake = "^2.0.0"
+pylint = "^2.15.9"
+pytest-asyncio = "^0.20.3"
+black = "^23.9.1"
+pytest-cov = "^4.1.0"
+pre-commit = "^3.4.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+log_cli = false
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+addopts = "-rsxX -l --tb=short"
+xfail_strict = true
+
+[tool.isort]
+profile = "black"
+known_first_party = "poetry"
+
+[tool.black]
+line-length = 79
+target-version = ['py310']
