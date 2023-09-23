@@ -381,18 +381,6 @@ files = [
 ]
 
 [[package]]
-name = "cachetools"
-version = "4.2.4"
-description = "Extensible memoizing collections and decorators"
-category = "main"
-optional = false
-python-versions = "~=3.5"
-files = [
-    {file = "cachetools-4.2.4-py3-none-any.whl", hash = "sha256:92971d3cb7d2a97efff7c7bb1657f21a8f5fb309a37530537c71b1774189f2d1"},
-    {file = "cachetools-4.2.4.tar.gz", hash = "sha256:89ea6f1b638d5a73a4f9226be57ac5e4f399d22770b92355f92dcb0f7f001693"},
-]
-
-[[package]]
 name = "cffi"
 version = "1.15.1"
 description = "Foreign Function Interface for Python calling C code."
@@ -1830,4 +1818,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "679fd8147a9e9ff7c362fe125cdb0d6406cc11d65d93eea4f7bdcce37a4f9e54"
+content-hash = "4147079285b6e803453643da477fe91d3afd628fd08e95ded367c574c4470ee8"
