@@ -13,11 +13,9 @@ cachetools = "^4.2.4"
 uvloop = "^0.16.0"
 aiodns = "^3.0.0"
 toml = "^0.10.2"
-apscheduler = "^3.9.1.post1"
 orjson = "^3.8.6"
 aioalice = { git = "https://github.com/rfoxxxy/aioalice" }
 pydantic = "^2.3.0"
-sqlalchemy = "^2.0.21"
 
 [tool.poetry.group.dev.dependencies]
 pycodestyle = "^2.8.0"

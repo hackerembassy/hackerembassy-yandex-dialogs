@@ -4,7 +4,6 @@ import os
 import time
 
 from aioalice import Dispatcher, get_new_configured_app
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from loguru import logger
 
 from hackem_yandex_dialogs.core.config_manager import ConfigManager
@@ -34,15 +33,6 @@ except RuntimeError:
 
 dp = Dispatcher(loop)
 app = get_new_configured_app(dp, config.get_item("app", "webhook_url"))
-
-scheduler = None  # pylint: disable=invalid-name
-
-if config.get_item("features", "use_apscheduler"):
-    logging.getLogger("apscheduler").setLevel(logging.INFO)
-    scheduler = AsyncIOScheduler(
-        loop=loop, timezone=config.get_item("features.apscheduler", "timezone")
-    )
-    scheduler.add_jobstore("sqlalchemy", url="sqlite:///static/jobs.sqlite3")
 
 
 class InterceptHandler(logging.Handler):

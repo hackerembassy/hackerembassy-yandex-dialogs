@@ -11,11 +11,5 @@ username = ""
 [core]
 supported_modules = ["modules"]
 
-# some integrations
 [features]
 use_file_logs = true
-use_apscheduler = true
-
-# apscheduler configuration (works only if use_apscheduler feature enabled)
-[features.apscheduler]
-timezone = "Asia/Yerevan"
