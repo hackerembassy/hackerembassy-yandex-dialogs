@@ -24,7 +24,7 @@ async def connect_telegram_handler(alice_request: AliceRequest):
     )
     return alice_request.response(
         "Отлично! Воспользуйся клавиатурой и отправь мне свой юзернейм Telegram, "
-        "обязательно без собачки, и после этого я смогу отмечать тебя на любом устройстве",
+        "и после этого я смогу отмечать тебя на любом устройстве",
         buttons=["Отмена"],
     )
 
@@ -51,9 +51,13 @@ async def connect_telegram_cancel_handler(alice_request: AliceRequest):
 @dp.request_handler(state=TelegramConnectionState.AWAITING_USERNAME)
 async def connect_telegram_username_handler(alice_request: AliceRequest):
     await dp.storage.reset_state(alice_request.session.user_id)
-    telegram_username = alice_request.request.original_utterance
+    telegram_username = alice_request.request.original_utterance.lstrip(
+        "@"
+    ).strip()
     return alice_request.response(
         f"Готово! Установлен юзернейм Telegram - {telegram_username}.\n\n"
-        "Если захочешь его изменить, просто попроси меня настроить его еще раз",
+        "Если захочешь его изменить, просто попроси меня настроить его еще раз. "
+        "Ты также можешь удалить его из моего хранилища, для этого просто скажи "
+        "«Алиса, попроси хакер спейс отключить телеграм»",
         user_state_update={"telegram_username": telegram_username},
     )

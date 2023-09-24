@@ -28,7 +28,13 @@ async def status_handler(alice_request: AliceRequest):
         else "Пока что никто не планирует приходить в спейс"
     )
     return alice_request.response(
-        f"На данный момент спейс {'открыт' if status.is_open else 'закрыт'}. {inside_status}. {going_status}"
+        f"На данный момент спейс {'открыт' if status.is_open else 'закрыт'}. {inside_status}. {going_status}",
+        buttons=[
+            "Кто внутри?",
+            "Кто планирует придти?",
+            "Я планирую придти",
+            "Я не планирую придти",
+        ],
     )
 
 
@@ -42,10 +48,25 @@ async def status_inside_count_handler(alice_request: AliceRequest):
     status = Status(**ans)
     print(status)
     if not status.inside:
-        return alice_request.response("На данный момент в спейсе никого нет")
+        return alice_request.response(
+            "На данный момент в спейсе никого нет",
+            buttons=[
+                "Статус спейса",
+                "Кто планирует придти?",
+                "Я планирую придти",
+                "Я не планирую придти",
+            ],
+        )
     inside_count = len(status.inside)
     return alice_request.response(
-        f"Внутри спейса {inside_count} {decl(inside_count, ['человек', 'человека', 'человек'])}"
+        f"Внутри спейса {inside_count} {decl(inside_count, ['человек', 'человека', 'человек'])}",
+        buttons=[
+            "Статус спейса",
+            "Кто внутри?",
+            "Кто планирует придти?",
+            "Я планирую придти",
+            "Я не планирую придти",
+        ],
     )
 
 
@@ -62,11 +83,24 @@ async def status_planning_count_handler(alice_request: AliceRequest):
     print(status)
     if not status.planning_to_go:
         return alice_request.response(
-            "Пока что никто не планирует приходить в спейс"
+            "Пока что никто не планирует приходить в спейс",
+            buttons=[
+                "Статус спейса",
+                "Кто внутри?",
+                "Я планирую придти",
+                "Я не планирую придти",
+            ],
         )
     going_count = len(status.planning_to_go)
     return alice_request.response(
-        f"Планиру{'ет' if going_count == 1 else 'ют'} придти в спейс еще {going_count} {decl(going_count, ['человек', 'человека', 'человек'])}"
+        f"Планиру{'ет' if going_count == 1 else 'ют'} придти в спейс еще {going_count} {decl(going_count, ['человек', 'человека', 'человек'])}",
+        buttons=[
+            "Статус спейса",
+            "Кто внутри?",
+            "Кто планирует придти?",
+            "Я планирую придти",
+            "Я не планирую придти",
+        ],
     )
 
 
@@ -80,7 +114,13 @@ async def status_state_handler(alice_request: AliceRequest):
     status = Status(**ans)
     print(status)
     return alice_request.response(
-        f"На данный момент спейс {'открыт' if status.is_open else 'закрыт'} пользователем {status.changed_by}"
+        f"На данный момент спейс {'открыт' if status.is_open else 'закрыт'} пользователем {status.changed_by}",
+        buttons=[
+            "Кто внутри?",
+            "Кто планирует придти?",
+            "Я планирую придти",
+            "Я не планирую придти",
+        ],
     )
 
 
@@ -94,10 +134,24 @@ async def status_who_inside_handler(alice_request: AliceRequest):
     status = Status(**ans)
     print(status)
     if not status.inside:
-        return alice_request.response("На данный момент в спейсе никого нет")
+        return alice_request.response(
+            "На данный момент в спейсе никого нет",
+            buttons=[
+                "Статус спейса",
+                "Кто планирует придти?",
+                "Я планирую придти",
+                "Я не планирую придти",
+            ],
+        )
     inside_count = len(status.inside)
     return alice_request.response(
-        f"Внутри спейса {inside_count} {decl(inside_count, ['человек', 'человека', 'человек'])}. А именно: {native_join([x.username for x in status.inside])}"
+        f"Внутри спейса {inside_count} {decl(inside_count, ['человек', 'человека', 'человек'])}. А именно: {native_join([x.username for x in status.inside])}",
+        buttons=[
+            "Статус спейса",
+            "Кто планирует придти?",
+            "Я планирую придти",
+            "Я не планирую придти",
+        ],
     )
 
 
@@ -112,9 +166,21 @@ async def status_who_planning_handler(alice_request: AliceRequest):
     print(status)
     if not status.planning_to_go:
         return alice_request.response(
-            "Пока что никто не планирует приходить в спейс"
+            "Пока что никто не планирует приходить в спейс",
+            buttons=[
+                "Статус спейса",
+                "Кто внутри?",
+                "Я планирую придти",
+                "Я не планирую придти",
+            ],
         )
     going_count = len(status.planning_to_go)
     return alice_request.response(
-        f"Планиру{'ет' if going_count == 1 else 'ют'} придти в спейс еще {going_count} {decl(going_count, ['человек', 'человека', 'человек'])}. А именно: {native_join([x.username for x in status.planning_to_go])}"  # pylint: disable=not-an-iterable
+        f"Планиру{'ет' if going_count == 1 else 'ют'} придти в спейс еще {going_count} {decl(going_count, ['человек', 'человека', 'человек'])}. А именно: {native_join([x.username for x in status.planning_to_go])}",  # pylint: disable=not-an-iterable
+        buttons=[
+            "Статус спейса",
+            "Кто внутри?",
+            "Я планирую придти",
+            "Я не планирую придти",
+        ],
     )

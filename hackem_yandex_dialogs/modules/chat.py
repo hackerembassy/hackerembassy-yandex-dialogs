@@ -22,7 +22,13 @@ async def startup_handler(alice_request: AliceRequest):
     return alice_request.response(
         "Привет! С помощью этого навыка ты можешь узнать статус спейса, "
         "кто внутри и кто планирует придти, а также отметиться планирующим придти.\n\n"
-        f"Чтобы воспользоваться мной, скажи, например: «Алиса, {random.choice(commands)}»"
+        f"Чтобы воспользоваться мной, скажи, например: «Алиса, {random.choice(commands)}»",
+        buttons=[
+            "Статус спейса",
+            "Кто внутри?",
+            "Кто планирует придти?",
+            "Я планирую придти в спейс",
+        ],
     )
 
 
@@ -44,3 +50,11 @@ async def bye_bye_handler(alice_request: AliceRequest):
 @dp.request_handler(commands=["спасибо"])
 async def thanks_handler(alice_request: AliceRequest):
     return alice_request.response("Обращайся ахпер джан")
+
+
+@dp.request_handler(commands=["пенисы", "я съебываю"])
+async def rickroll_handler(alice_request: AliceRequest):
+    return alice_request.response(
+        "Да",
+        tts='<speaker audio="dialogs-upload/b293af34-45ce-45a1-8756-abbd1e57a0d1/503cf12a-79d3-4996-9255-d1bcd345376c.opus">',
+    )

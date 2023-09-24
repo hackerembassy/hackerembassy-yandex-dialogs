@@ -40,7 +40,7 @@ async def going_handler(alice_request: AliceRequest):
         return alice_request.response(
             "Мы еще не знакомы, так что я не могу тебя отметить.\n\n"
             "Воспользуйся клавиатурой и отправь мне свой Telegram "
-            "юзернейм, обязательно без собачки, и после этого "
+            "юзернейм, и после этого "
             "я смогу отмечать тебя на любом устройстве",
             buttons=["Отмена"],
         )
@@ -70,12 +70,13 @@ async def going_handler(alice_request: AliceRequest):
         message=message,
     )
     return alice_request.response(
-        f"Теперь ты планируешь придти в спейс {message if message else ''}"
+        f"Теперь ты планируешь придти в спейс {message if message else ''}",
+        buttons=["Статус спейса", "Я больше не планирую придти"],
     )
 
 
 @dp.request_handler(
-    regexp=r"я( сегодня| больше|) не (планирую|при(й|)ду|зайду|заеду|приеду|заскочу|забегу|иду)( в спейс|)( сегодня|)( в спейс|)( при(д|й)ти| зайти| заехать| приехать| заскочить| забежать|)( в спейс|)( сегодня|) .+"
+    regexp=r"я( сегодня| больше|) не (планирую|при(й|)ду|зайду|заеду|приеду|заскочу|забегу|иду)( в спейс|)( сегодня|)( в спейс|)( при(д|й)ти| приходить| зайти| заехать| приехать| заскочить| забежать|)( в спейс|)( сегодня|) .+"
 )
 async def not_going_handler(alice_request: AliceRequest):
     has_screen = (
@@ -107,7 +108,7 @@ async def not_going_handler(alice_request: AliceRequest):
         return alice_request.response(
             "Мы еще не знакомы, так что я не могу тебя отметить.\n\n"
             "Воспользуйся клавиатурой и отправь мне свой Telegram "
-            "юзернейм, обязательно без собачки, и после этого "
+            "юзернейм, и после этого "
             "я смогу отмечать тебя на любом устройстве",
             buttons=["Отмена"],
         )
@@ -116,4 +117,7 @@ async def not_going_handler(alice_request: AliceRequest):
         username=telegram_username,
         isgoing=False,
     )
-    return alice_request.response("Теперь ты не планируешь придти в спейс")
+    return alice_request.response(
+        "Теперь ты не планируешь придти в спейс",
+        buttons=["Статус спейса", "Я планирую придти"],
+    )
