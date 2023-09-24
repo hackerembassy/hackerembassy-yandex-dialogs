@@ -4,6 +4,7 @@ import os
 import time
 
 from aioalice import Dispatcher, get_new_configured_app
+from aioalice.dispatcher import MemoryStorage
 from loguru import logger
 
 from hackem_yandex_dialogs.core.config_manager import ConfigManager
@@ -31,7 +32,7 @@ except RuntimeError:
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
 
-dp = Dispatcher(loop)
+dp = Dispatcher(loop, MemoryStorage())
 app = get_new_configured_app(dp, config.get_item("app", "webhook_url"))
 
 

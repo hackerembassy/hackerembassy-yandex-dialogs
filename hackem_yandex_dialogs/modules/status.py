@@ -50,7 +50,7 @@ async def status_inside_count_handler(alice_request: AliceRequest):
 
 
 @dp.request_handler(
-    regexp=r"сколько (человек|людей) (придет|планирует придти)"
+    regexp=r"сколько (человек|людей) (придет|планирует при(д|й)ти)"
 )
 async def status_planning_count_handler(alice_request: AliceRequest):
     ans = await make_api_request("api/status", False)
@@ -101,7 +101,7 @@ async def status_who_inside_handler(alice_request: AliceRequest):
     )
 
 
-@dp.request_handler(regexp=r"кто планирует( зайти| придти|)( в спейс|)")
+@dp.request_handler(regexp=r"кто планирует( зайти| при(д|й)ти|)( в спейс|)")
 async def status_who_planning_handler(alice_request: AliceRequest):
     ans = await make_api_request("api/status", False)
     if "error" in ans:
